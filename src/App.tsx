@@ -1,16 +1,10 @@
-import { ThemeProvider } from 'styled-components';
-import { useThemeContext } from './theme/ThemeContextProvider';
-import { CssBaseline } from '@mui/material';
-import { Home } from './page/Home';
+import { RouterProvider } from 'react-router-dom'
+import { router } from './routes/router'
 
 export const App = () => {
-  const { theme } = useThemeContext();
-
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {/* <Home /> */}
-      jupi
-    </ThemeProvider>
-  );
-};
+    <div>
+      <RouterProvider router={router} />
+    </div>
+  )
+}

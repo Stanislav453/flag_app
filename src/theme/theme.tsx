@@ -1,39 +1,65 @@
 import { PaletteMode } from '@mui/material';
-import { amber, deepOrange, grey } from '@mui/material/colors';
-
-const theme = {
-  palette: {
-    primary: amber,
-  },
-};
+import { amber, grey } from '@mui/material/colors';
 
 export const getDesignTokens = (mode: PaletteMode) => ({
+  typography: {
+    fontFamily: ['Nunito Sans', 'sans-serif'].join(','),
+    h1: {
+      fontSize: 30,
+      fontWeight: 800,
+    },
+  },
   palette: {
     mode,
-    ...(mode === 'light'
-      ? {
-          // palette values for light mode
-          primary: amber,
-          divider: amber[200],
-          text: {
-            primary: grey[900],
-            secondary: grey[800],
+    primary: {
+      ...amber,
+      ...(mode === 'dark' && {
+        main: '#fff',
+      }),
+    },
+    ...(mode === 'dark' && {
+      background: {
+        default: ' hsl(207, 26%, 17%)',
+        boxColor: 'hsl(209, 23%, 22%)',
+      },
+    }),
+    ...(mode === 'light' && {
+      background: {
+        default: 'hsl(0, 0%, 98%)',
+        boxColor: 'hsl(0, 0%, 100%)',
+        borderColor: 'hsl(0, 0%, 52%)',
+      },
+    }),
+    text: {
+      ...(mode === 'light'
+        ? {
+            primary: 'hsl(200, 15%, 8%)',
+          }
+        : {
+            primary: 'hsl(0, 0%, 100%)',
+          }),
+    },
+  },
+  components: {
+    MuiButton: {
+      variants: [
+        {
+          props: { variant: 'outlined' },
+          style: {
+            textTransform: 'capitalize',
+            border: 'none',
+            ':hover': {
+              border: 'none',
+            },
           },
-        }
-      : {
-          // palette values for dark mode
-          primary: deepOrange,
-          divider: deepOrange[700],
-          background: {
-            default: deepOrange[900],
-            paper: deepOrange[900],
+        },
+        {
+          props: { variant: 'text' },
+          style: {
+            textTransform: 'capitalize',
           },
-          text: {
-            primary: '#fff',
-            secondary: grey[500],
-          },
-        }),
+        },
+      ],
+    },
   },
 });
-
-export default theme;
