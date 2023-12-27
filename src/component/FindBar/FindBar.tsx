@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
-import { AddCountry } from './Inputs/addCountry';
-import { AddRegion } from './Inputs/addRegion';
+import { AddCountry } from './Inputs/AddCountry';
+import { AddRegion } from './Inputs/AddRegion';
 import { dataType } from '../../type';
 
 type findBarType = {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactNode } from 'react';
+import { useState, useEffect} from 'react';
 import { Box, Button, Stack, Typography, ButtonGroup } from '@mui/material';
 import { FaArrowLeftLong } from 'react-icons/fa6';
 import {
@@ -19,7 +19,7 @@ import { dataType } from '../../type';
 
 export const CountryDetail = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<ReactNode | unknown>(null);
+  const [error, setError] = useState<any>(null);
   const [fetchData, setFetchData] = useState<dataType[]>([]);
 
 
