@@ -6,10 +6,15 @@ import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { filter_by } from '../../../string';
 import MenuItem from '@mui/material/MenuItem';
-import { setFilterDataProps } from '../../../type';
 import { strAll } from '../../../string';
+import { dataType } from '../../../type';
 
-export const AddRegion = ({ setFilterData , data }: setFilterDataProps) => {
+type addRegionType = {
+  setFilterData: React.Dispatch<React.SetStateAction<dataType[]>>;
+  data: dataType[];
+};
+
+export const AddRegion = ({ setFilterData, data }: addRegionType) => {
   const [selectRegion, setSelectRegion] = useState(strAll);
 
   const handleChange = (event: SelectChangeEvent) => {

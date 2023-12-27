@@ -6,10 +6,13 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import { strCapital, strPopulation, strRegion } from '../../string';
+import { dataType } from '../../type';
 
-export const Items = ({ filterData }: any) => {
-  console.log(filterData)
+type itemsType = {
+  filterData: dataType[]
+};
 
+export const Items = ({ filterData }: itemsType) => {
   return (
     <Box
       component='main'
@@ -18,18 +21,19 @@ export const Items = ({ filterData }: any) => {
       margin='0 auto'
       px='2rem'
     >
-      
-      <Grid container spacing={9}>
-        {filterData.map((item, key) => {
-          const { flags, name, population, region, capital} = item;
+      <Grid container spacing={9} >
+        {filterData.map((item, key: number) => {
+          const { flags, name, population, region, capital } = item;
 
           return (
-            <Grid item xs={3} key={key}>
+            <Grid item md={3} xs={12} key={key}>
               <Button
                 href={`/country/${name.common}`}
-                sx={{ p: 0, textAlign: 'left' }}
+                sx={{ p: 0, textAlign: 'left', width: '100%' }}
               >
-                <Card sx={{ maxWidth: 345, bgcolor: 'background.boxColor' }}>
+                <Card
+                  sx={{ bgcolor: 'background.boxColor' }}
+                >
                   <CardActionArea
                     sx={{
                       '& > a': {
@@ -44,7 +48,7 @@ export const Items = ({ filterData }: any) => {
                       image={flags.svg}
                       alt={name.common}
                     />
-                    <CardContent sx={{ py: '1rem' }}>
+                    <CardContent sx={{ py: '1rem', width: '100%'}}>
                       <Typography
                         gutterBottom
                         variant='h5'

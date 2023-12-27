@@ -1,17 +1,23 @@
 import { Box } from '@mui/material';
 import { AddCountry } from './Inputs/addCountry';
 import { AddRegion } from './Inputs/addRegion';
-import { setFilterDataProps } from '../../type';
+import { dataType } from '../../type';
+
+type findBarType = {
+  setFilterData: React.Dispatch<React.SetStateAction<dataType[]>>;
+  data: dataType[];
+};
 
 
-
-export const FindBar = ({ setFilterData, data }: setFilterDataProps) => {
+export const FindBar = ({ setFilterData, data }: findBarType) => {
   return (
     <Box
       component='section'
       sx={{
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent:'space-between',
+        flexDirection: { md: 'row', xs: 'column' },
+        gap: { md: 0, xs: 5 },
         width: '100%',
         maxWidth: '1400px',
         margin: '3em auto',

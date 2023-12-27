@@ -1,14 +1,19 @@
 import TextField from '@mui/material/TextField';
+import { ChangeEvent } from 'react';
 import { search } from '../../../string';
 import InputAdornment from '@mui/material/InputAdornment';
 import { FaSearch } from 'react-icons/fa';
-import data from '../../../../data.json';
+import { dataType} from '../../../type';
+type addCountryType = {
+  setFilterData: React.Dispatch<React.SetStateAction<dataType[]>>;
+  data: dataType[];
+};
 
-export const AddCountry = ({ setFilterData, data }: any) => {
-  const filterByName = (event) => {
+export const AddCountry = ({ setFilterData, data }: addCountryType) => {
+  const filterByName = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value.toLowerCase();
     setFilterData(
-      data.filter((item) => item.name.common.toLowerCase().startsWith(value))
+      data.filter((item: dataType) => item.name.common.toLowerCase().startsWith(value))
     );
   };
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 import { Box, Button, Stack, Typography, ButtonGroup } from '@mui/material';
 import { FaArrowLeftLong } from 'react-icons/fa6';
 import {
@@ -15,11 +15,13 @@ import {
 } from '../../string';
 import { useParams } from 'react-router';
 import { API_URL } from '../../api/api';
+import { dataType } from '../../type';
 
 export const CountryDetail = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [fetchData, setFetchData] = useState([]);
+  const [error, setError] = useState<ReactNode | unknown>(null);
+  const [fetchData, setFetchData] = useState<dataType[]>([]);
+
 
   const { countryName } = useParams();
 
@@ -49,7 +51,7 @@ export const CountryDetail = () => {
     <>
       {loading && !error && <h4>Loading....</h4>}
       {error && loading && <h4>{error}</h4>}
-      {itemDetailFilter.map((item, key) => {
+      {itemDetailFilter.map((item, key: number) => {
         const {
           flags,
           name,
@@ -64,6 +66,7 @@ export const CountryDetail = () => {
         return (
           <>
             <Box
+              key={key}
               maxWidth='1400px'
               margin='0 auto'
               px='2rem'
@@ -80,7 +83,7 @@ export const CountryDetail = () => {
               <Button
                 href='/'
                 sx={{
-                  my: '6rem',
+                  my:{ md: '6rem', xs:'3rem' },
                   a: {
                     padding: '.2rem 1rem',
                     color: 'text.primary',
@@ -94,7 +97,7 @@ export const CountryDetail = () => {
 
               <Stack
                 component='section'
-                direction='row'
+                direction={{ md: 'row', sx: 'column' }}
                 alignItems='center'
                 gap={10}
               >
@@ -108,12 +111,12 @@ export const CountryDetail = () => {
                 </Box>
                 <Box component='article' flex={1}>
                   <Box component='div'>
-                    <Typography component='h3' variant='h3'>
+                    <Typography component='h3' variant='h3' fontWeight={800} >
                       {name.common}
                     </Typography>
                     <Stack
                       component='div'
-                      direction='row'
+                      direction={{ md: 'row', sx: 'column' }}
                       justifyContent={'space-between'}
                       sx={{
                         ul: { padding: 0 },
@@ -236,9 +239,11 @@ export const CountryDetail = () => {
                             {strLanguages}:{' '}
                           </Typography>
                           <Box component='span'>
-                            {Object.entries(languages).map(
-                              ([key, value]) => `${value} `
-                            )}
+                            {Object.entries(languages).map(([key, value]) => (
+                              <Typography key={key} component='span'>
+                                {value}
+                              </Typography>
+                            ))}
                           </Box>
                         </Box>
                       </Stack>
@@ -258,24 +263,26 @@ export const CountryDetail = () => {
                       </Typography>
                       <ButtonGroup
                         variant='outlined'
-                        sx={{ pl: 2 }}
+                        sx={{ display:'flex', flexWrap:'wrap', gap: 2, pt: 2}}
                         aria-label='button group'
                       >
-                        {item.borders.map((bordersItem: string, key: number) => {
-                          const bordersCountryName = fetchData.filter(
-                            (item) => item.cca3 === bordersItem
-                          );
-                          return (
-                            <Button
-                              href={`/country/${bordersCountryName[0].name.common}`}
-                              variant='outlined'
-                              key={key}
-                              sx={{ bgcolor: 'background.boxColor', mr: 2 }}
-                            >
-                              {bordersCountryName[0].name.common}
-                            </Button>
-                          );
-                        })}
+                        {item.borders.map(
+                          (bordersItem: string, key: number) => {
+                            const bordersCountryName = fetchData.filter(
+                              (item) => item.cca3 === bordersItem
+                            );
+                            return (
+                              <Button
+                                key={key}
+                                href={`/country/${bordersCountryName[0].name.common}`}
+                                variant='outlined'
+                                sx={{ bgcolor: 'background.boxColor', mr: 2 }}
+                              >
+                                {bordersCountryName[0].name.common}
+                              </Button>
+                            );
+                          }
+                        )}
                       </ButtonGroup>
                     </Box>
                   )}

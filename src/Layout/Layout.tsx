@@ -1,12 +1,10 @@
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { useThemeContext } from '../theme/useThemeContext';
+import { useThemeContext } from '../theme/ThemeContextProvider.tsx';
 import { Header } from '../component/Header/Header';
 import { Outlet } from 'react-router';
 
-
 export const Layout = () => {
-
   const { theme } = useThemeContext();
 
   return (

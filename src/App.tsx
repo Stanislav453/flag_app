@@ -3,8 +3,8 @@ import { router } from './routes/router'
 
 export const App = () => {
   return (
-    <div>
+    <>
       <RouterProvider router={router} />
-    </div>
+    </>
   )
 }
