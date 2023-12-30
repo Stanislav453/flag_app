@@ -64,4 +64,4 @@ export const getDesignTokens = (mode?: PaletteMode) => ({
       ],
     },
   },
-});
+}) as any
